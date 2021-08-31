@@ -35,9 +35,21 @@ namespace LinkedList
             _tail = last;
         }
 
-        public void AddNode(Node<T> node)
+        public void AddNode(T data)
         {
+            var newNode = new Node<T>(data);
 
+            if (_tail != null)
+            {
+                _tail.SetNext(newNode);
+            } else if (_head != null)
+            {
+                _head.SetNext(newNode);
+            } else
+            {
+                _head = newNode;
+            }
+            _tail = newNode;
         }
 
         public override string ToString()
@@ -52,6 +64,39 @@ namespace LinkedList
             }
 
             return output;
+        }
+    }
+
+    internal class Node<T>
+    {
+        private T _data;
+        private Node<T> _next;
+
+        public T Data { get => _data; set => _data = value; }
+
+        public Node(T data)
+        {
+            _data = data;
+        }
+
+        public void SetNext(Node<T> node)
+        {
+            _next = node;
+        }
+
+        public Node<T> GetNext()
+        {
+            return _next;
+        }
+
+        public bool HasNext()
+        {
+            return _next != null;
+        }
+
+        public override string ToString()
+        {
+            return _data.ToString();
         }
     }
 }

@@ -13,6 +13,7 @@ namespace LinkedList.Test
         private readonly string _firstElement = "first";
         private readonly string _secondElement = "2nd";
         private readonly string _thirdElement = "THIRD";
+        private readonly string _newElement = "NNNNEEEEWWWW!!!!";
 
         [SetUp]
         public void Setup()
@@ -49,6 +50,33 @@ namespace LinkedList.Test
         public void ToString_ThreeElementLinkedList_ReturnsCommaSeparatedString()
         {
             var expectedOutput = $"{_firstElement}, {_secondElement}, {_thirdElement}";
+            Assert.AreEqual(expectedOutput, _threeElement_LinkedList.ToString());
+        }
+
+        [Test]
+        public void AddNode_ToEmptyLinkedList_ToString_ReturnsSingleElement()
+        {
+            _empty_LinkedList.AddNode(_newElement);
+            Assert.AreEqual(_newElement, _empty_LinkedList.ToString());
+        }
+
+        [Test]
+        public void AddNode_ToSingleElementLinkedList_ToString_ReturnsTwoElements()
+        {
+            var expectedOutput = $"{_firstElement}, {_newElement}";
+
+            _oneElement_LinkedList.AddNode(_newElement);
+
+            Assert.AreEqual(expectedOutput, _oneElement_LinkedList.ToString());
+        }
+
+        [Test]
+        public void AddNode_ToThreeElementLinkedList_ToString_ReturnsFourElements()
+        {
+            var expectedOutput = $"{_firstElement}, {_secondElement}, {_thirdElement}, {_newElement}";
+
+            _threeElement_LinkedList.AddNode(_newElement);
+
             Assert.AreEqual(expectedOutput, _threeElement_LinkedList.ToString());
         }
     }
