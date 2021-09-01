@@ -52,6 +52,37 @@ namespace LinkedList
             _tail = newNode;
         }
 
+        public T RemoveNode(int index)
+        {
+            var current = _head;
+            Node<T> last = null;
+
+            while (current?.HasNext() == true && index > 0)
+            {
+                index--;
+                last = current;
+                current = current.GetNext();
+            }
+            if (index == 0)
+            {
+                // Reached index in loop.
+                if (last == null)
+                {
+                    // Set _head to next Node, or null if nothing follows it.
+                    _head = current?.GetNext();
+                } else
+                {
+                    var next = current?.GetNext();
+                    last.SetNext(next);
+                    if (next == null)
+                        _tail = last;
+                }
+                return current.Data;
+            }
+
+            return default;
+        }
+
         public override string ToString()
         {
             var current = _head;

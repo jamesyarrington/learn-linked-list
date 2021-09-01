@@ -8,7 +8,6 @@ namespace LinkedList.Test
         private LinkedList<string> _oneElement_LinkedList;
         private LinkedList<string> _twoElement_LinkedList;
         private LinkedList<string> _threeElement_LinkedList;
-        private LinkedList<int> _manyElement_LinkedList;
 
         private readonly string _firstElement = "first";
         private readonly string _secondElement = "2nd";
@@ -78,6 +77,55 @@ namespace LinkedList.Test
             _threeElement_LinkedList.AddNode(_newElement);
 
             Assert.AreEqual(expectedOutput, _threeElement_LinkedList.ToString());
+        }
+
+        [Test]
+        public void RemoveNode_EmptyLinkedList_ReturnsNull()
+        {
+            Assert.IsNull(_empty_LinkedList.RemoveNode(2));
+            Assert.AreEqual("", _empty_LinkedList.ToString());
+        }
+
+        [Test]
+        public void RemoveNode_OneElementLinkedList_ReturnsValueAndEmpties()
+        {
+            Assert.AreEqual(_firstElement, _oneElement_LinkedList.RemoveNode(0));
+            Assert.AreEqual("", _oneElement_LinkedList.ToString());
+        }
+
+        [Test]
+        public void RemoveNode_OneElementLinkedListOutBoundsIndex_ReturnsNull()
+        {
+            Assert.IsNull(_oneElement_LinkedList.RemoveNode(1));
+            Assert.AreEqual(_firstElement, _oneElement_LinkedList.ToString());
+        }
+
+        [Test]
+        public void RemoveNode_ThreeElementLinkedList_ReturnsandRemovesValue()
+        {
+            Assert.AreEqual(_secondElement, _threeElement_LinkedList.RemoveNode(1));
+            Assert.AreEqual($"{_firstElement}, {_thirdElement}", _threeElement_LinkedList.ToString());
+        }
+
+        [Test]
+        public void RemoveNode_ThreeElementLinkedListRemoveHead_ReturnsandRemovesValue()
+        {
+            Assert.AreEqual(_firstElement, _threeElement_LinkedList.RemoveNode(0));
+            Assert.AreEqual($"{_secondElement}, {_thirdElement}", _threeElement_LinkedList.ToString());
+        }
+
+        [Test]
+        public void RemoveNode_ThreeElementLinkedListRemoveTail_ReturnsandRemovesValue()
+        {
+            Assert.AreEqual(_thirdElement, _threeElement_LinkedList.RemoveNode(2));
+            Assert.AreEqual($"{_firstElement}, {_secondElement}", _threeElement_LinkedList.ToString());
+        }
+
+        [Test]
+        public void RemoveNode_ThreeElementLinkedListOutBoundsIndex_ReturnsNull()
+        {
+            Assert.IsNull(_threeElement_LinkedList.RemoveNode(4));
+            Assert.AreEqual($"{_firstElement}, {_secondElement}, {_thirdElement}", _threeElement_LinkedList.ToString());
         }
     }
 }
