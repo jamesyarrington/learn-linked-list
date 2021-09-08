@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace LinkedList.Test
 {
-    public class Tests
+    public class LinkedListTests
     {
         private LinkedList<string> _empty_LinkedList;
         private LinkedList<string> _oneElement_LinkedList;
