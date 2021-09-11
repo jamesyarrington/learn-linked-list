@@ -51,5 +51,25 @@ namespace ArrayList
             }
             _length--;
         }
+
+        public void RemoveBadOrder(int index)
+        {
+            if (index >= _length)
+                throw new ArgumentOutOfRangeException($"{index} is out of range.  Length is {_length}");
+
+            _length--;
+            _data[index] = _data[_length];
+
+            // Reorder Attempt 1 - This is 3 times more expensive than Remove(), which is O(n/2)
+            // Also its not ordered right yet.
+            T swap;
+            var end = _length - 1;
+            for (var swapIndex = index; swapIndex < end; swapIndex++)
+            {
+                swap = _data[swapIndex];
+                _data[swapIndex] = _data[end];
+                _data[end] = swap;
+            }
+        }
     }
 }
