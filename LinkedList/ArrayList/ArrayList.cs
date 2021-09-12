@@ -60,16 +60,13 @@ namespace ArrayList
             _length--;
             _data[index] = _data[_length];
 
-            // Reorder Attempt 1 - This is 3 times more expensive than Remove(), which is O(n/2)
-            // Also its not ordered right yet.
-            T swap;
-            var end = _length - 1;
-            for (var swapIndex = index; swapIndex < end; swapIndex++)
+            // Reorder Attempt 2 - Just duplicating Remove()?
+            var hold = _data[index];
+            for (var i = index; i < _length; i++)
             {
-                swap = _data[swapIndex];
-                _data[swapIndex] = _data[end];
-                _data[end] = swap;
+                _data[i] = _data[i + 1];
             }
+            _data[_length] = hold;
         }
     }
 }
