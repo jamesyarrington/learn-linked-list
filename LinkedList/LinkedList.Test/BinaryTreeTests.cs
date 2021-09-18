@@ -16,19 +16,30 @@ namespace LinkedList.Test
         {
         }
 
+        public void InOrderTraversal()
+        {
+
+        }
+
         [Test]
         public void DummyTest()
         {
             var kholinFamilyTree = new BinaryTree<string>();
-            kholinFamilyTree.Add("Dalinar");
-            kholinFamilyTree.Add("Gavilar");
-            kholinFamilyTree.Add("Jasnah");
-            kholinFamilyTree.Add("Elhokar");
-            kholinFamilyTree.Add("Navani");
-            kholinFamilyTree.Add("Adolin");
-            kholinFamilyTree.Add("Renarin");
-            kholinFamilyTree.Add("Kaladin <Adopted>");
-            kholinFamilyTree.Add("Shallan");
+            kholinFamilyTree.Add("1");
+            kholinFamilyTree.Add("2");
+            kholinFamilyTree.Add("3");
+            kholinFamilyTree.Add("4");
+            kholinFamilyTree.Add("5");
+            kholinFamilyTree.Add("6");
+            kholinFamilyTree.Add("7");
+            kholinFamilyTree.Add("8");
+            kholinFamilyTree.Add("9");
+            kholinFamilyTree.Add("10");
+            kholinFamilyTree.Add("11");
+            kholinFamilyTree.Add("12");
+            kholinFamilyTree.Add("13");
+            kholinFamilyTree.Add("14");
+            kholinFamilyTree.Add("15");
 
             Console.Write(kholinFamilyTree);
         }

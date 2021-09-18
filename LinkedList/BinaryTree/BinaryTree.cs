@@ -20,6 +20,17 @@ namespace BinaryTree
                 _head = nodeToAdd;
                 return;
             }
+            _head.Add(nodeToAdd);
+        }
+
+        public void AddRandom(T data)
+        {
+            var nodeToAdd = new Node<T>(data);
+            if (_head == null)
+            {
+                _head = nodeToAdd;
+                return;
+            }
             var searchNode = _head;
             var random = new Random(DateTime.Now.Millisecond);
             while (searchNode != null)
@@ -41,6 +52,21 @@ namespace BinaryTree
                     return;
                 }
             }
+        }
+
+        public string InOrderTraversal()
+        {
+            return _head.InOrderTraversal();
+        }
+
+        public string PreOrderTraversal()
+        {
+            return _head.PreOrderTraversal();
+        }
+
+        public string PostOrderTraversal()
+        {
+            return _head.PostOrderTraversal();
         }
 
         public override string ToString()
@@ -90,6 +116,74 @@ namespace BinaryTree
         public bool HasLeft()
         {
             return _left != null;
+        }
+
+        public string PreOrderTraversal()
+        {
+            return "foo";
+        }
+
+        public string InOrderTraversal()
+        {
+            return "foo";
+        }
+
+        public string PostOrderTraversal()
+        {
+            return "foo";
+        }
+
+        public void Add(Node<T> data)
+        {
+            if (!HasLeft())
+            {
+                SetLeft(data);
+                return;
+            }
+            if (!HasRight())
+            {
+                SetRight(data);
+                return;
+            }
+            var left = GetLeft();
+            if (!left.IsFull() || IsFull())
+            {
+                // Add when both sides full, or left has space.
+                left.Add(data);
+            } else
+            {
+                GetRight().Add(data);
+            }
+
+        }
+
+        private int LeftDepth()
+        {
+            var current = this;
+            var depth = 0;
+            while (current.HasLeft())
+            {
+                depth++;
+                current = current.GetLeft();
+            }
+            return depth;
+        }
+
+        private bool IsFull()
+        {
+            return HasLeft() & LeftDepth() == RightDepth();
+        }
+
+        private int RightDepth()
+        {
+            var current = this;
+            var depth = 0;
+            while (current.HasRight())
+            {
+                depth++;
+                current = current.GetRight();
+            }
+            return depth;
         }
 
         public override string ToString()
