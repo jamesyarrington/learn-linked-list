@@ -69,6 +69,19 @@ namespace BinaryTree
             return _head.PostOrderTraversal();
         }
 
+        public string LevelOrderTraversal()
+        {
+            var output = "";
+            for (var i = 0; i <= _head.Depth(); i++)
+            {
+                if (i > 0)
+                    output += ", ";
+                output += _head.PrintLevel(i);
+            }
+
+            return output;
+        }
+
         public override string ToString()
         {
             return _head.ToString();
@@ -141,8 +154,16 @@ namespace BinaryTree
             var leftTraversal = HasLeft() ?
                  _left?.PostOrderTraversal() + ", " : "";
             var rightTraversal = HasRight() ?
-                _right?.PostOrderTraversal() + ", ": "";
+                _right?.PostOrderTraversal() + ", " : "";
             return $"{leftTraversal}{rightTraversal}{_data}";
+        }
+
+        public string PrintLevel(int level)
+        {
+            if (level <= 0)
+                return _data.ToString();
+            var delim = HasLeft() & HasRight() ? ", " : "";
+            return $"{_left?.PrintLevel(level - 1)}{delim}{_right?.PrintLevel(level - 1)}";
         }
 
         public void Add(Node<T> data)
@@ -167,6 +188,11 @@ namespace BinaryTree
                 GetRight().Add(data);
             }
 
+        }
+
+        public int Depth()
+        {
+            return LeftDepth(); // Only correct for this implementation, where it fills in left-side first.
         }
 
         private int LeftDepth()
