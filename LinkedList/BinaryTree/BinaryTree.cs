@@ -120,17 +120,29 @@ namespace BinaryTree
 
         public string PreOrderTraversal()
         {
-            return "foo";
+            var leftTraversal = HasLeft() ?
+                 ", " + _left?.PreOrderTraversal() : "";
+            var rightTraversal = HasRight() ?
+                 ", " + _right?.PreOrderTraversal() : "";
+            return $"{_data}{leftTraversal}{rightTraversal}";
         }
 
         public string InOrderTraversal()
         {
-            return "foo";
+            var leftTraversal = HasLeft() ?
+                 _left?.InOrderTraversal() + ", ": "";
+            var rightTraversal = HasRight() ?
+                 ", " + _right?.InOrderTraversal() : "";
+            return $"{leftTraversal}{_data}{rightTraversal}";
         }
 
         public string PostOrderTraversal()
         {
-            return "foo";
+            var leftTraversal = HasLeft() ?
+                 _left?.PostOrderTraversal() + ", " : "";
+            var rightTraversal = HasRight() ?
+                _right?.PostOrderTraversal() + ", ": "";
+            return $"{leftTraversal}{rightTraversal}{_data}";
         }
 
         public void Add(Node<T> data)
