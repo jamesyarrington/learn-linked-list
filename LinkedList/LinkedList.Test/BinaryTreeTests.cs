@@ -51,6 +51,13 @@ namespace LinkedList.Test
         }
 
         [Test]
+        public void ExpensiveLevelOrderTraversal()
+        {
+            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15",
+                _testBinaryTree.ExpensiveLevelOrderTraversal());
+        }
+
+        [Test]
         public void DummyTest()
         {
             var kholinFamilyTree = new BinaryTree<string>();

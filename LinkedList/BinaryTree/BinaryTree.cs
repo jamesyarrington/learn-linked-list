@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace BinaryTree
 {
@@ -70,6 +72,31 @@ namespace BinaryTree
         }
 
         public string LevelOrderTraversal()
+        {
+            var output = new List<Node<T>>(_head.Depth() * ((int)Math.Log(_head.Depth() + 1)));
+            output.Add(_head);
+            var parsedEntries = 0;
+            while (parsedEntries < output.Count)
+            {
+                for (var i = parsedEntries; i < output.Count; i++)
+                {
+                    parsedEntries++;
+                    var nodeToParse = output[i];
+                    if (nodeToParse.HasLeft())
+                    {
+                        output.Add(nodeToParse.GetLeft());
+                    }
+                    if (nodeToParse.HasRight())
+                    {
+                        output.Add(nodeToParse.GetRight());
+                    }
+                }
+            }
+
+            return string.Join(", ", output.Select( n => n.Data));
+        }
+
+        public string ExpensiveLevelOrderTraversal()
         {
             var output = "";
             for (var i = 0; i <= _head.Depth(); i++)
