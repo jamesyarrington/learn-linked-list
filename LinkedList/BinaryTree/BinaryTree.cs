@@ -7,7 +7,7 @@ namespace BinaryTree
 {
     public class BinaryTree<T>
     {
-        private Node<T> _head;
+        internal Node<T> _head;
 
         public BinaryTree()
         {
