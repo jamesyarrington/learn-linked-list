@@ -219,19 +219,16 @@ namespace BinaryTree
 
         public int Depth()
         {
-            return LeftDepth(); // Only correct for this implementation, where it fills in left-side first.
+            return Math.Max(LeftDepth(), RightDepth());
         }
 
-        private int LeftDepth()
+        internal int LeftDepth()
         {
-            var current = this;
-            var depth = 0;
-            while (current.HasLeft())
+            if (HasLeft())
             {
-                depth++;
-                current = current.GetLeft();
+                return 1 + GetLeft().Depth();
             }
-            return depth;
+            return 0;
         }
 
         private bool IsFull()
@@ -239,16 +236,13 @@ namespace BinaryTree
             return HasLeft() & LeftDepth() == RightDepth();
         }
 
-        private int RightDepth()
+        internal int RightDepth()
         {
-            var current = this;
-            var depth = 0;
-            while (current.HasRight())
+            if (HasRight())
             {
-                depth++;
-                current = current.GetRight();
+                return 1 + GetRight().Depth();
             }
-            return depth;
+            return 0;
         }
 
         public override string ToString()
@@ -310,6 +304,30 @@ namespace BinaryTree
             {
                 return (reader.ReadLine() ?? "").Length;
             }
+        }
+
+        internal Node<T> PenultimateLeft()
+        {
+            if (!HasLeft())
+                return this;
+            var current = this;
+            do
+            {
+                current = current.GetLeft();
+            } while (current.HasLeft() && current.GetLeft().HasLeft());
+            return current;
+        }
+
+        internal Node<T> PenultimateRight()
+        {
+            if (!HasRight())
+                return this;
+            var current = this;
+            do
+            {
+                current = current.GetRight();
+            } while (current.HasRight() && current.GetRight().HasRight());
+            return current;
         }
     }
 }
