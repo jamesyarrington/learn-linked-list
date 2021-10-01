@@ -306,6 +306,34 @@ namespace BinaryTree
             }
         }
 
+        internal List<Node<T>> LeftEdge()
+        {
+            if (HasLeft())
+            {
+                var leftEdge = GetLeft().LeftEdge();
+                leftEdge.Add(this);
+                return leftEdge;
+            }
+            else
+            {
+                return new List<Node<T>>() { this };
+            }
+        }
+
+        internal List<Node<T>> RightEdge()
+        {
+            if (HasRight())
+            {
+                var rightEdge = GetRight().RightEdge();
+                rightEdge.Add(this);
+                return rightEdge;
+            }
+            else
+            {
+                return new List<Node<T>>() { this };
+            }
+        }
+
         internal Node<T> PenultimateLeft()
         {
             if (!HasLeft())

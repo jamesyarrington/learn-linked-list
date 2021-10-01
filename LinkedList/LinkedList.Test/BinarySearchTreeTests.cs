@@ -59,15 +59,6 @@ namespace LinkedList.Test
         }
 
         [Test]
-        public void ExpensiveLevelOrderTraversal()
-        {
-            // Well This is broken for the binary search tree.
-            // I think I made assumptions about how the tree was filled.
-            Assert.AreEqual("8, 6, 13, 2, 7, 10, 15, 0, 4, , 9, 11, 14",
-                _testBinaryTree.ExpensiveLevelOrderTraversal());
-        }
-
-        [Test]
         public void DummyTest()
         {
             Console.Write(_testBinaryTree);

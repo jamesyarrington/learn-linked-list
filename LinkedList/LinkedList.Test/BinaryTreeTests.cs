@@ -23,41 +23,6 @@ namespace LinkedList.Test
         }
 
         [Test]
-        public void PreeOrderTraversal()
-        {
-            Assert.AreEqual("1, 2, 4, 8, 9, 5, 10, 11, 3, 6, 12, 13, 7, 14, 15",
-                _testBinaryTree.PreOrderTraversal());
-        }
-
-        [Test]
-        public void InOrderTraversal()
-        {
-            Assert.AreEqual("8, 4, 9, 2, 10, 5, 11, 1, 12, 6, 13, 3, 14, 7, 15",
-                _testBinaryTree.InOrderTraversal());
-        }
-
-        [Test]
-        public void PostOrderTraversal()
-        {
-            Assert.AreEqual("8, 9, 4, 10, 11, 5, 2, 12, 13, 6, 14, 15, 7, 3, 1",
-                _testBinaryTree.PostOrderTraversal());
-        }
-
-        [Test]
-        public void LevelOrderTraversal()
-        {
-            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15",
-                _testBinaryTree.LevelOrderTraversal());
-        }
-
-        [Test]
-        public void ExpensiveLevelOrderTraversal()
-        {
-            Assert.AreEqual("1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15",
-                _testBinaryTree.ExpensiveLevelOrderTraversal());
-        }
-
-        [Test]
         public void DummyTest()
         {
             var kholinFamilyTree = new BinaryTree<string>();

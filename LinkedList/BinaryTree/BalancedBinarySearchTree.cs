@@ -60,61 +60,45 @@ namespace BinaryTree
             var balance = LeftDepth() -  RightDepth();
             if (balance > 1)
             {
-                var newHeadsParent = GetLeft().PenultimateRight();
-                var newHead = newHeadsParent;
-                if (newHeadsParent.HasRight()) {
-                    newHead = newHeadsParent.GetRight();
-                    newHeadsParent.SetRight(null);
+                var centerEdge = GetLeft().RightEdge(); // log(n)
+                var edgeLength = centerEdge.Count;
+                var newHead = centerEdge[0];
+                if (edgeLength > 1 & centerEdge[1].HasRight()) {
+                    newHead = centerEdge[1].GetRight();
+                    centerEdge[1].SetRight(null);
                 } else
                 {
                     SetRight(null);
                 }
-                var oldLeft = GetLeft();
                 SetLeft(null);
+                newHead.SetRight(this);
 
-                // SO MUCH HACK
-                if (this != newHead)
-                    newHead.SetRight(this);
-
-                if (oldLeft.GetRight() == newHead)
+                if (edgeLength > 1)
                 {
-                    oldLeft.SetRight(null);
-                    newHead.Add(oldLeft);
-                }
-                else if (newHead != oldLeft)
-                {
-                    newHead.Add(oldLeft);
+                    ((BalancedBinarySearchNode<T>)newHead).Add((BalancedBinarySearchNode<T>)centerEdge[edgeLength - 1]);
                 }
                 return (BalancedBinarySearchNode<T>)newHead;
             }
             if (balance < -1)
             {
-                var newHeadsParent = GetRight().PenultimateLeft();
-                var newHead = newHeadsParent;
-                if (newHeadsParent.HasLeft())
+                var centerEdge = GetRight().LeftEdge();
+                var edgeLength = centerEdge.Count;
+                var newHead = centerEdge[0];
+                if (centerEdge.Count > 1 & centerEdge[1].HasLeft())
                 {
-                    newHead = newHeadsParent.GetLeft();
-                    newHeadsParent.SetLeft(null);
+                    newHead = centerEdge[1].GetLeft();
+                    centerEdge[1].SetLeft(null);
                 }
                 else
                 {
                     SetLeft(null);
                 }
-                var oldRight = GetRight();
                 SetRight(null);
+                newHead.SetLeft(this);
 
-                // SO MUCH HACK
-                if (newHead != this)
-                    newHead.SetLeft(this);
-
-                if (oldRight.GetLeft() == newHead)
+                if (edgeLength > 1)
                 {
-                    oldRight.SetLeft(null);
-                    newHead.Add(oldRight);
-                }
-                else if (newHead != oldRight)
-                {
-                    newHead.Add(oldRight);
+                    ((BalancedBinarySearchNode<T>)newHead).Add((BalancedBinarySearchNode<T>)centerEdge[edgeLength - 1]);
                 }
                 return (BalancedBinarySearchNode<T>)newHead;
             }
