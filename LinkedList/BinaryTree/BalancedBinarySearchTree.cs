@@ -52,7 +52,7 @@ namespace BinaryTree
 
         public int CompareTo(BalancedBinarySearchNode<T> that)
         {
-            return (Data as IComparable).CompareTo(that.Data as IComparable);
+            return (Data as IComparable<T>).CompareTo(that.Data);
         }
 
         private BalancedBinarySearchNode<T> Balanced()
@@ -63,7 +63,7 @@ namespace BinaryTree
                 var centerEdge = GetLeft().RightEdge(); // log(n)
                 var edgeLength = centerEdge.Count;
                 var newHead = centerEdge[0];
-                if (edgeLength > 1 & centerEdge[1].HasRight()) {
+                if (edgeLength > 1 && centerEdge[1].HasRight()) {
                     newHead = centerEdge[1].GetRight();
                     centerEdge[1].SetRight(null);
                 } else
@@ -84,7 +84,7 @@ namespace BinaryTree
                 var centerEdge = GetRight().LeftEdge();
                 var edgeLength = centerEdge.Count;
                 var newHead = centerEdge[0];
-                if (centerEdge.Count > 1 & centerEdge[1].HasLeft())
+                if (centerEdge.Count > 1 && centerEdge[1].HasLeft())
                 {
                     newHead = centerEdge[1].GetLeft();
                     centerEdge[1].SetLeft(null);
