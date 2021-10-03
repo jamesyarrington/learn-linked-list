@@ -14,6 +14,12 @@ namespace Dict
             Add(new DictEntry<T1, T2>(key, value));
         }
 
+        public T2 Remove(T1 keyToRemove)
+        {
+            var entryToRemove = new DictEntry<T1, T2>(keyToRemove, default);
+            return Remove(entryToRemove).Value;
+        }
+
         public T2 Get(T1 key)
         {
             var current = _head;
@@ -26,7 +32,7 @@ namespace Dict
                         current = current.GetLeft();
                     } else
                     {
-                        throw new Exception("Finding love shouldn't be a stretch.");
+                        throw new KeyNotFoundException("Finding love shouldn't be a stretch.");
                     }
                 } else
                 {
@@ -36,7 +42,7 @@ namespace Dict
                     }
                     else
                     {
-                        throw new Exception("That's why I trust eHarmony.");
+                        throw new KeyNotFoundException("That's why I trust eHarmony.");
                     }
                 }
                 comparison = current.Data.CompareTo(key);

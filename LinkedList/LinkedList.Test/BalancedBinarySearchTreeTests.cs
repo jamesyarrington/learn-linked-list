@@ -12,7 +12,6 @@ namespace LinkedList.Test
         public void Setup()
         {
             _testBinaryTree = new BalancedBinarySearchTree<int>();
-            _testBinaryTree.Add(8);
             _testBinaryTree.Add(6);
             _testBinaryTree.Add(13);
             _testBinaryTree.Add(10);
@@ -21,6 +20,7 @@ namespace LinkedList.Test
             _testBinaryTree.Add(0);
             _testBinaryTree.Add(11);
             _testBinaryTree.Add(9);
+            _testBinaryTree.Add(8);
             _testBinaryTree.Add(12);
             _testBinaryTree.Add(15);
             _testBinaryTree.Add(5);

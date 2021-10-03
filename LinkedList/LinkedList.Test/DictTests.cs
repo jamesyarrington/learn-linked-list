@@ -2,6 +2,7 @@
 using Dict;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace LinkedList.Test
 {
@@ -37,6 +38,38 @@ namespace LinkedList.Test
             Assert.AreEqual(_testDict.Get("ghj"), "A C00l T3st V@lu3");
             Assert.AreEqual(_testDict.Get("wer"), "1 Cool Test Value");
             Assert.AreEqual(_testDict.Get("fgh"), "WHHHHHYYYYYYY?!??!");
+        }
+
+        [Test]
+        public void Get_InvalidEntry_Throws()
+        {
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                _testDict.Get("fooo");
+            });
+        }
+
+        [Test]
+        public void Remove_OnlyRemovesSpecifiedEntries()
+        {
+            var result = _testDict.Remove("ghj");
+            Console.WriteLine("...");
+            Console.WriteLine(_testDict);
+
+            Assert.AreEqual("A C00l T3st V@lu3", result);
+            Assert.AreEqual(_testDict.Get("abc"), "A Cool Test Value");
+            Assert.AreEqual(_testDict.Get("qwe"), "A Cooler Test Value");
+            Assert.AreEqual(_testDict.Get("cvb"), "A Really Cool Test Value");
+            Assert.AreEqual(_testDict.Get("tut"), "A Cool Testing Value");
+            Assert.AreEqual(_testDict.Get("det"), "Cool Test Value!");
+            Assert.AreEqual(_testDict.Get("loi"), "A Boring Test Value");
+            Assert.AreEqual(_testDict.Get("wer"), "1 Cool Test Value");
+            Assert.AreEqual(_testDict.Get("fgh"), "WHHHHHYYYYYYY?!??!");
+
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                _testDict.Get("ghj");
+            });
         }
     }
 }
