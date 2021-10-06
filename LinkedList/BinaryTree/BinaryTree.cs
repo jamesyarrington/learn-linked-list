@@ -170,7 +170,7 @@ namespace BinaryTree
         public string InOrderTraversal()
         {
             var leftTraversal = HasLeft() ?
-                 _left?.InOrderTraversal() + ", ": "";
+                 _left?.InOrderTraversal() + ", " : "";
             var rightTraversal = HasRight() ?
                  ", " + _right?.InOrderTraversal() : "";
             return $"{leftTraversal}{_data}{rightTraversal}";
@@ -193,26 +193,31 @@ namespace BinaryTree
             return $"{_left?.PrintLevel(level - 1)}{delim}{_right?.PrintLevel(level - 1)}";
         }
 
-        public void Add(Node<T> data)
+        public List<Node<T>> Add(Node<T> data)
         {
             if (!HasLeft())
             {
                 SetLeft(data);
-                return;
+                return new List<Node<T>> { data, this };
             }
             if (!HasRight())
             {
                 SetRight(data);
-                return;
+                return new List<Node<T>> { data, this };
             }
             var left = GetLeft();
+            var right = GetRight();
             if (!left.IsFull() || IsFull())
             {
                 // Add when both sides full, or left has space.
-                left.Add(data);
+                var parentOrder = left.Add(data);
+                parentOrder.Add(this);
+                return parentOrder;
             } else
             {
-                GetRight().Add(data);
+                var parentOrder = right.Add(data);
+                parentOrder.Add(this);
+                return parentOrder;
             }
 
         }
@@ -233,7 +238,9 @@ namespace BinaryTree
 
         private bool IsFull()
         {
-            return HasLeft() & LeftDepth() == RightDepth();
+            if (!HasLeft() && !HasRight())
+                return true;
+            return GetLeft().IsFull() && HasRight() && GetRight().IsFull() && LeftDepth() == RightDepth();
         }
 
         internal int RightDepth()
@@ -356,6 +363,11 @@ namespace BinaryTree
                 current = current.GetRight();
             } while (current.HasRight() && current.GetRight().HasRight());
             return current;
+        }
+
+        public int CompareTo(Node<T> that)
+        {
+            return (Data as IComparable).CompareTo(that.Data as IComparable);
         }
     }
 }
